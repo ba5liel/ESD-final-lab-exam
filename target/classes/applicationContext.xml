@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!-- Define the DBConnectionManager bean -->
+    <bean id="dbConnectionManager" class="com.booking.db.DBConnectionManager">
+        <!-- You can set properties here if needed -->
+        <property name="jdbcURL" value="jdbc:mysql://localhost:3306/bookstore" />
+        <property name="jdbcUsername" value="root" />
+        <property name="jdbcPassword" value="" />
+    </bean>
+    
+    <!-- Define the BookRegistrationServlet bean -->
+    <bean id="bookRegistrationServlet" class="com.booking.servlet.BookRegistrationServlet">
+        <constructor-arg ref="dbConnectionManager" />
+    </bean>
+
+</beans> 

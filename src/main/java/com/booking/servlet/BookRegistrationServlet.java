@@ -11,11 +11,37 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-@NoArgsConstructor
 public class BookRegistrationServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private DBConnectionManager dbManager = new DBConnectionManager();
+    private final DBConnectionManager dbManager;
+    
+    public BookRegistrationServlet(DBConnectionManager dbManager) {
+        this.dbManager = dbManager;
+    }
+    
+    public BookRegistrationServlet() {
+        this.dbManager = null;
+    }
+    
+    @Override
+    public void init() throws ServletException {
+        if (this.dbManager == null) {
+            org.springframework.web.context.WebApplicationContext springContext = 
+                org.springframework.web.context.support.WebApplicationContextUtils
+                    .getWebApplicationContext(getServletContext());
+                    
+            DBConnectionManager manager = springContext.getBean(DBConnectionManager.class);
+            
+            try {
+                java.lang.reflect.Field field = BookRegistrationServlet.class.getDeclaredField("dbManager");
+                field.setAccessible(true);
+                field.set(this, manager);
+            } catch (Exception e) {
+                throw new ServletException("Failed to inject dependencies", e);
+            }
+        }
+    }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -27,6 +53,8 @@ public class BookRegistrationServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
 
         try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            
             dbManager.openConnection();
             Connection conn = dbManager.getConnection();
 

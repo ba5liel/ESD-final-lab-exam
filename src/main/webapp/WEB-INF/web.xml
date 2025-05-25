@@ -8,16 +8,31 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
   <display-name>Archetype Created Web Application</display-name>
   
-  
+
   <servlet>
     <servlet-name>BookRegistrationServlet</servlet-name>
     <servlet-class>com.booking.servlet.BookRegistrationServlet</servlet-class>
-</servlet>
+  </servlet>
 
-<servlet-mapping>
+  <servlet-mapping>
     <servlet-name>BookRegistrationServlet</servlet-name>
     <url-pattern>/registerBook</url-pattern>
-</servlet-mapping>
+  </servlet-mapping>
+
+  <servlet>
+    <servlet-name>DisplayBooksServlet</servlet-name>
+    <servlet-class>com.booking.servlet.DisplayBooksServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>DisplayBooksServlet</servlet-name>
+    <url-pattern>/displayBooks</url-pattern>
+  </servlet-mapping>
   
+  <!-- Add welcome file list -->
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
   
 </web-app>
