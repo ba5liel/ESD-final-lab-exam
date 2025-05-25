@@ -7,8 +7,8 @@
                            http://www.springframework.org/schema/context
                            http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <!-- Define the DBConnectionManager bean -->
-    <bean id="dbConnectionManager" class="com.booking.db.DBConnectionManager">
+    <!-- Define the DBUtil bean -->
+    <bean id="DBUtil" class="com.booking.db.DBUtil">
         <!-- You can set properties here if needed -->
         <property name="jdbcURL" value="jdbc:mysql://localhost:3306/bookstore" />
         <property name="jdbcUsername" value="root" />
@@ -17,7 +17,7 @@
     
     <!-- Define the BookRegistrationServlet bean -->
     <bean id="bookRegistrationServlet" class="com.booking.servlet.BookRegistrationServlet">
-        <constructor-arg ref="dbConnectionManager" />
+        <constructor-arg ref="DBUtil" />
     </bean>
 
 </beans> 
