@@ -1,17 +1,11 @@
 package com.booking.db;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-@Getter
-@Setter
-@NoArgsConstructor
-public class DBConnectionManager {
+public class DBUtil {
 
     private String jdbcURL = "jdbc:mysql://localhost:3306/bookstore";
     private String jdbcUsername = "root";       // replace with your MySQL username

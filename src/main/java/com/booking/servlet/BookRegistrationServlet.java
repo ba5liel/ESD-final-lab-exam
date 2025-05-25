@@ -1,6 +1,6 @@
 package com.booking.servlet;
 
-import com.booking.db.DBConnectionManager;
+import com.booking.db.DBUtil;
 import lombok.NoArgsConstructor;
 
 import jakarta.servlet.ServletException;
@@ -14,9 +14,9 @@ import java.sql.PreparedStatement;
 public class BookRegistrationServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private final DBConnectionManager dbManager;
+    private final DBUtil dbManager;
     
-    public BookRegistrationServlet(DBConnectionManager dbManager) {
+    public BookRegistrationServlet(DBUtil dbManager) {
         this.dbManager = dbManager;
     }
     
@@ -31,7 +31,7 @@ public class BookRegistrationServlet extends HttpServlet {
                 org.springframework.web.context.support.WebApplicationContextUtils
                     .getWebApplicationContext(getServletContext());
                     
-            DBConnectionManager manager = springContext.getBean(DBConnectionManager.class);
+            DBUtil manager = springContext.getBean(DBUtil.class);
             
             try {
                 java.lang.reflect.Field field = BookRegistrationServlet.class.getDeclaredField("dbManager");
