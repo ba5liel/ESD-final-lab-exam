@@ -1,6 +1,6 @@
 package com.booking.servlet;
 
-import com.booking.db.DBConnectionManager;
+import com.booking.db.DBUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,7 +28,8 @@ public class DeleteBookServlet extends HttpServlet {
         out.println("<!DOCTYPE html>");
         out.println("<html>");
         out.println("<head>");
-        out.println("<title>Delete Book</title>");
+        out.println("<meta charset='UTF-8'>");
+        out.println("<title>መጽሐፉ ዘርዙ</title>");
         out.println("<style>");
         out.println("body { font-family: Arial, sans-serif; margin: 0; padding: 20px; text-align: center; }");
         out.println("h2 { color: #333; }");
@@ -61,21 +62,21 @@ public class DeleteBookServlet extends HttpServlet {
             int rowsAffected = stmt.executeUpdate();
             
             if (rowsAffected > 0) {
-                out.println("<h2 class='success'>✅ Book Deleted Successfully!</h2>");
-                out.println("<p>The book with ID " + bookId + " has been removed from the database.</p>");
+                out.println("<h2 class='success'>Book Deleted Successfully!</h2>");
+                out.println("<p>መጽሐፉ በተሳካ ሁኔታ ተዘርዙዋል፡ " + bookId + " በተሳካ ሁኔታ ተዘርዙዋል</p>");
             } else {
-                out.println("<h2 class='error'>❌ Delete Operation Failed</h2>");
-                out.println("<p>No book found with ID " + bookId + ".</p>");
+                out.println("<h2 class='error'>የመሰረዝ ሂደቱ አልተሳካም</h2>");
+                out.println("<p>መለያ ቁጥር " + bookId + " ያለው መጽሐፍ አልተገኘም።</p>");
             }
             
             stmt.close();
             dbManager.closeConnection();
             
         } catch (NumberFormatException e) {
-            out.println("<h2 class='error'>❌ Invalid Book ID</h2>");
+            out.println("<h2 class='error'>Invalid Book ID</h2>");
             out.println("<p>Please provide a valid numeric ID for the book.</p>");
         } catch (Exception e) {
-            out.println("<h2 class='error'>❌ Error Occurred</h2>");
+            out.println("<h2 class='error'>Error Occurred</h2>");
             out.println("<p>" + e.getMessage() + "</p>");
             e.printStackTrace(out);
         }

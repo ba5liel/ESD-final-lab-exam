@@ -15,9 +15,15 @@
         <property name="jdbcPassword" value="" />
     </bean>
     
+    <!-- Define the BookDAO bean -->
+    <bean id="bookDAO" class="com.booking.db.BookDAO">
+        <!-- If BookDAO needs any dependencies, configure them here -->
+    </bean>
+    
     <!-- Define the BookRegistrationServlet bean -->
     <bean id="bookRegistrationServlet" class="com.booking.servlet.BookRegistrationServlet">
         <constructor-arg ref="DBUtil" />
+        <constructor-arg ref="bookDAO" />
     </bean>
 
 </beans> 
