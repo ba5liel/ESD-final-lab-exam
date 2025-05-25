@@ -1,7 +1,8 @@
 package com.booking.servlet;
 
+import com.booking.db.Book;
+import com.booking.db.BookDAO;
 import com.booking.db.DBUtil;
-import lombok.NoArgsConstructor;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -49,30 +50,16 @@ public class BookRegistrationServlet extends HttpServlet {
         String author = request.getParameter("author");
         double price = Double.parseDouble(request.getParameter("price"));
 
-        response.setContentType("text/html");
+        response.setContentType("text/html; charset=UTF-8");
         PrintWriter out = response.getWriter();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            Book book = new Book(title, author, price);
+            BookDAO bookDAO = new BookDAO();
+            bookDAO.addBook(dbManager, book);
             
-            dbManager.openConnection();
-            Connection conn = dbManager.getConnection();
-
-            String sql = "INSERT INTO Books (title, author, price) VALUES (?, ?, ?)";
-            PreparedStatement stmt = conn.prepareStatement(sql);
-            stmt.setString(1, title);
-            stmt.setString(2, author);
-            stmt.setDouble(3, price);
-
-            int rows = stmt.executeUpdate();
-            if (rows > 0) {
-                out.println("<h2>✅ Book registered successfully!</h2>");
-            } else {
-                out.println("<h2>❌ Failed to register book.</h2>");
-            }
-
-            dbManager.closeConnection();
         } catch (Exception e) {
+            out.println("<h2>Error: " + e.getMessage() + "</h2>");
             e.printStackTrace(out);
         }
     }

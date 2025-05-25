@@ -1,6 +1,6 @@
 package com.booking.servlet;
 
-import com.booking.db.DBConnectionManager;
+import com.booking.db.DBUtil;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,7 +14,7 @@ import java.sql.Statement;
 
 public class DisplayBooksServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private DBConnectionManager dbManager = new DBConnectionManager();
+    private DBUtil dbManager = new DBUtil();
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -24,6 +24,7 @@ public class DisplayBooksServlet extends HttpServlet {
         out.println("<!DOCTYPE html>");
         out.println("<html>");
         out.println("<head>");
+        out.println("<meta charset='UTF-8'>");
         out.println("<title>Book List</title>");
         out.println("<style>");
         out.println("table { border-collapse: collapse; width: 80%; margin: 20px auto; }");

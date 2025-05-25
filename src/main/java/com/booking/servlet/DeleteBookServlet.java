@@ -13,7 +13,7 @@ import java.sql.PreparedStatement;
 @WebServlet("/deleteBook")
 public class DeleteBookServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private DBConnectionManager dbManager = new DBConnectionManager();
+    private DBUtil dbManager = new DBUtil();
     
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {

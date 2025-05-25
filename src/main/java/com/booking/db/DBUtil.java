@@ -20,7 +20,6 @@ public class DBUtil {
 
     public void openConnection() throws SQLException {
         try {
-            // Explicitly load the MySQL driver
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             throw new SQLException("MySQL JDBC Driver not found", e);
